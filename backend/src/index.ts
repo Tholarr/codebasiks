@@ -8,13 +8,19 @@ import { tmpdir } from "os";
 const app = express();
 const PORT = 3001;
 
+const execEnv = {
+  ...process.env,
+  PATH: `C:\\msys64\\mingw64\\bin;${process.env.PATH}`,
+};
+
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
 app.post("/api/execute", (req, res) => {
-  const { code, expectedOutput } = req.body as {
+  const { code, expectedOutput, functionCall } = req.body as {
     code: string;
     expectedOutput: string;
+    functionCall: string;
   };
 
   const fullSource = `
@@ -22,7 +28,7 @@ ${code}
 
 int main(void)
 {
-    my_print_alpha();
+    ${functionCall};
     return 0;
 }
 `;
@@ -33,13 +39,13 @@ int main(void)
 
   writeFileSync(srcPath, fullSource);
 
-  exec(`gcc "${srcPath}" -o "${binPath}"`, { timeout: 10000 }, (compileErr, _, compileStderr) => {
+  exec(`gcc "${srcPath}" -o "${binPath}"`, { timeout: 10000, env: execEnv }, (compileErr, _, compileStderr) => {
     if (compileErr) {
       cleanup(srcPath, binPath);
       return res.json({ success: false, reason: "compile_error", details: compileStderr });
     }
 
-    exec(`"${binPath}"`, { timeout: 5000 }, (runErr, stdout, stderr) => {
+    exec(`"${binPath}"`, { timeout: 5000, env: execEnv }, (runErr, stdout, stderr) => {
       cleanup(srcPath, binPath);
 
       if (runErr && !stdout) {
