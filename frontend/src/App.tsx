@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const choices = ["The program skips the loop entirely", "The loop runs forever", "The program crashes immediately", "The loop runs exactly once"];
 const correct = "The loop runs forever";
@@ -27,6 +28,7 @@ export default function App() {
   const [code, setCode] = useState(starterCode);
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<RunResult | null>(null);
+  const navigate = useNavigate();
 
   const getColor = (choice: string): string => {
     if (!verified) return "black";
@@ -65,6 +67,9 @@ export default function App() {
 
   return (
     <div style={{ maxWidth: 740, margin: "0 auto", padding: "2rem", fontFamily: "sans-serif", lineHeight: 1.7 }}>
+      <button onClick={() => navigate("/")} style={secondaryButtonStyle}>
+        ← Back to Home
+      </button>
 
       {/* ── Lesson ── */}
       <h1>Characters and loops in C</h1>
@@ -154,7 +159,7 @@ c = 'a';`}
         </label>
       ))}
 
-      <button onClick={() => setVerified(true)} style={{ marginTop: "1rem" }}>
+      <button onClick={() => setVerified(true)} style={secondaryButtonStyle}>
         Verify
       </button>
 
@@ -189,7 +194,7 @@ c = 'a';`}
         }}
       />
 
-      <button onClick={runCode} disabled={running} style={{ marginTop: "0.5rem" }}>
+      <button onClick={runCode} disabled={running} style={secondaryButtonStyle}>
         {running ? "Running..." : "Run"}
       </button>
 
@@ -207,6 +212,23 @@ c = 'a';`}
           {resultMessage()}
         </pre>
       )}
+
+      <div style={{ marginTop: "2rem", textAlign: "center" }}>
+        <button
+          onClick={() => navigate("/lesson/02")}
+          style={{
+            padding: "0.75rem 2rem",
+            fontSize: "1rem",
+            cursor: "pointer",
+            backgroundColor: "#2e7d32",
+            color: "white",
+            border: "none",
+            borderRadius: "6px",
+          }}
+        >
+          Next →
+        </button>
+      </div>
     </div>
   );
 }
@@ -219,4 +241,15 @@ const codeBlockStyle: React.CSSProperties = {
   fontFamily: "monospace",
   fontSize: "14px",
   overflowX: "auto",
+};
+
+const secondaryButtonStyle: React.CSSProperties = {
+  padding: "0.5rem 1.25rem",
+  fontSize: "0.9rem",
+  cursor: "pointer",
+  backgroundColor: "#999999",
+  color: "white",
+  border: "none",
+  borderRadius: "6px",
+  marginTop: "1rem",
 };
