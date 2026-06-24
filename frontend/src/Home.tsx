@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { primaryButtonStyle } from "./styles/common";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -11,24 +12,11 @@ export default function Home() {
       fontFamily: "sans-serif",
       textAlign: "center",
     }}>
-      <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-        CodeBasiks
-      </h1>
+      <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>CodeBasiks</h1>
       <p style={{ fontSize: "1.1rem", color: "#555", marginBottom: "2rem" }}>
         Learn programming fundamentals step by step, through interactive lessons and real coding exercises.
       </p>
-      <button
-        onClick={() => navigate("/lesson/01")}
-        style={{
-          padding: "0.75rem 2rem",
-          fontSize: "1rem",
-          cursor: "pointer",
-          backgroundColor: "#2e7d32",
-          color: "white",
-          border: "none",
-          borderRadius: "6px",
-        }}
-      >
+      <button onClick={() => navigate("/module/01/lesson/01")} style={primaryButtonStyle}>
         Start
       </button>
     </div>
