@@ -18,7 +18,7 @@ const execEnv = {
   PATH: `C:\\msys64\\mingw64\\bin;${process.env.PATH}`,
 };
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({origin: ["http://localhost:5173", "https://codebasiks.vercel.app"]}));
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
