@@ -13,7 +13,7 @@ void my_swap(int *a, int *b)
 
 export default function Lesson01() {
   return (
-    <LessonLayout title="Introduction to pointers" nextPath="/module/02/lesson/02">
+    <LessonLayout title="Introduction to pointers" prevPath="/module/02" nextPath="/module/02/lesson/02">
 
       <p>
         Every variable stored in a program occupies a specific location in memory. That location
