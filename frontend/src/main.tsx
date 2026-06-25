@@ -8,11 +8,11 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Module01 from "./modules/Module01";
 import Module02 from "./modules/Module02";
-import Lesson01M01 from "./lessons/module01/lesson01";
-import Lesson02M01 from "./lessons/module01/lesson02";
-import Lesson01M02 from "./lessons/module02/lesson01";
-import Lesson02M02 from "./lessons/module02/lesson02";
-import Lesson03M02 from "./lessons/module02/lesson03";
+import Lesson01M01 from "./lessons/module01/Lesson01";
+import Lesson02M01 from "./lessons/module01/Lesson02";
+import Lesson01M02 from "./lessons/module02/Lesson01";
+import Lesson02M02 from "./lessons/module02/Lesson02";
+import Lesson03M02 from "./lessons/module02/Lesson03";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
