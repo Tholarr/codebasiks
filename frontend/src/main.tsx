@@ -8,6 +8,7 @@ import Lesson01M01 from "./lessons/module01/lesson01";
 import Lesson02M01 from "./lessons/module01/lesson02";
 import Lesson01M02 from "./lessons/module02/lesson01";
 import Lesson02M02 from "./lessons/module02/lesson02";
+import Lesson03M02 from "./lessons/module02/lesson03";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById("root")!).render(
         {/* Module 02 */}
         <Route path="/module/02/lesson/01" element={<Lesson01M02 />} />
         <Route path="/module/02/lesson/02" element={<Lesson02M02 />} />
+        <Route path="/module/02/lesson/03" element={<Lesson03M02 />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
