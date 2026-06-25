@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { pool } from "../../db";
+import { pool } from "../db";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
