@@ -11,7 +11,6 @@ type RunResult = {
 
 type Props = {
     title: string;
-    delivery: string;
     description: React.ReactNode;
     prototype: string;
     starterCode: string;
@@ -19,7 +18,7 @@ type Props = {
     functionCall: string;
 };
 
-export default function CodeExercise({ title, delivery, description, prototype, starterCode, expectedOutput, functionCall }: Props) {
+export default function CodeExercise({ title, description, prototype, starterCode, expectedOutput, functionCall }: Props) {
     const [code, setCode] = useState(starterCode);
     const [running, setRunning] = useState(false);
     const [result, setResult] = useState<RunResult | null>(null);
@@ -55,7 +54,6 @@ export default function CodeExercise({ title, delivery, description, prototype, 
     return (
         <div>
             <h2>{title}</h2>
-            <p><strong>Delivery:</strong> {delivery}</p>
             <p>{description}</p>
             <pre style={codeBlockStyle}>{prototype}</pre>
 

@@ -106,7 +106,6 @@ export default function Lesson01() {
             {/* ── Exercise ── */}
             <CodeExercise
                 title="Task 01 - my_print_alpha"
-                delivery="my_print_alpha.c"
                 description={<>Write a function that, beginning with <strong>a</strong>, displays the lowercase alphabet in ascending order, on a single line. It must be prototyped as follows:</>}
                 prototype="int my_print_alpha(void);"
                 starterCode={starterCode1}
@@ -118,7 +117,6 @@ export default function Lesson01() {
 
             <CodeExercise
                 title="Task 02 - my_print_revalpha"
-                delivery="my_print_revalpha.c"
                 description={<>Write a function that, beginning with <strong>z</strong>, displays the lowercase alphabet in descending order, on a single line. It must be prototyped as follows:</>}
                 prototype="int my_print_revalpha(void);"
                 starterCode={starterCode2}
@@ -130,7 +128,6 @@ export default function Lesson01() {
 
             <CodeExercise
                 title="Task 03 - my_print_digits"
-                delivery="my_print_digits.c"
                 description={<>Write a function that displays all the digits, on a single line, in ascending order. It must be prototyped as follows:</>}
                 prototype="int my_print_digits(void);"
                 starterCode={starterCode3}
