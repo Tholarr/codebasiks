@@ -52,7 +52,7 @@ int main(void)
         return res.json({ success: false, reason: "runtime_error", details: stderr });
       }
 
-      const output  = stdout.trim();
+      const output = stdout.trim().replace(/\r\n/g, "\n").replace(/\r/g, "\n");
       const success = output === expectedOutput.trim();
 
       res.json({ success, reason: success ? "ok" : "wrong_output", stdout: output, expected: expectedOutput });
