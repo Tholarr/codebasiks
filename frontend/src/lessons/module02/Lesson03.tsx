@@ -29,7 +29,7 @@ void my_sort_int_array(int *array, int size)
 
 export default function Lesson03() {
   return (
-    <LessonLayout title="String manipulation and arrays" prevPath="/module/02/lesson/02" nextPath="/module/03">
+    <LessonLayout title="String manipulation and arrays" modulePath="/module/02" prevPath="/module/02/lesson/02" nextPath="/module/03">
 
       <p>
         When working with pointers, it is often useful to consult the official documentation of C

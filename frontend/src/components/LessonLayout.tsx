@@ -5,12 +5,13 @@ import Navbar from "./Navbar";
 
 type Props = {
   title: string;
+  modulePath: string;
   prevPath?: string;
   nextPath?: string;
   children: React.ReactNode;
 };
 
-export default function LessonLayout({ title, prevPath, nextPath, children }: Props) {
+export default function LessonLayout({ title, modulePath, prevPath, nextPath, children }: Props) {
   const navigate = useNavigate();
 
   const go = (path: string) => {
@@ -24,8 +25,8 @@ export default function LessonLayout({ title, prevPath, nextPath, children }: Pr
         <Navbar />
 
         <div style={{ maxWidth: 740, margin: "0 auto", padding: "2rem", lineHeight: 1.7 }}>
-          <button onClick={() => go("/")} style={secondaryButtonStyle}>
-            ← Back to Home
+          <button onClick={() => go(modulePath)} style={secondaryButtonStyle}>
+            ← Back to Module
           </button>
 
           <h1 style={{ marginTop: "1.5rem" }}>{title}</h1>

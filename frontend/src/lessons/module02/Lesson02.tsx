@@ -21,11 +21,7 @@ int my_strlen(char const *str)
 
 export default function Lesson02() {
   return (
-    <LessonLayout
-      title="Pointers and strings"
-      prevPath="/module/02/lesson/01"
-      nextPath="/module/02/lesson/03"
-    >
+    <LessonLayout title="Pointers and strings" modulePath="/module/02" prevPath="/module/02/lesson/01" nextPath="/module/02/lesson/03">
 
       <p>
         In C, a <strong>string</strong> is not a special type, it is simply a sequence of{" "}
