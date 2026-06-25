@@ -29,7 +29,7 @@ int my_print_digits(void)
 
 export default function Lesson01() {
     return (
-        <LessonLayout title="Characters and loops in C" nextPath="/module/01/lesson/02">
+        <LessonLayout title="Characters and loops in C" prevPath="/module/01" nextPath="/module/01/lesson/02">
 
             {/* ── Lesson content ── */}
             <p>

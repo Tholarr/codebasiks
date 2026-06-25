@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const modules = [
-  { name: "Variables, Loops and Conditions", path: "/module/01/lesson/01" },
-  { name: "Pointers", path: "/module/02/lesson/01" },
+  { name: "Variables, Loops and Conditions", path: "/module/01" },
+  { name: "Pointers", path: "/module/02" },
 ];
 
 export default function Navbar() {
