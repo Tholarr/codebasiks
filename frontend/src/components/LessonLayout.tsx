@@ -36,12 +36,12 @@ export default function LessonLayout({ title, prevPath, nextPath, children }: Pr
             <div style={{ marginTop: "2rem", display: "flex", justifyContent: "center", gap: "1rem" }}>
               {prevPath && (
                 <button onClick={() => go(prevPath)} style={primaryButtonStyle}>
-                  ← Previous lesson
+                  ← Previous
                 </button>
               )}
               {nextPath && (
                 <button onClick={() => go(nextPath)} style={primaryButtonStyle}>
-                  Next lesson →
+                  Next →
                 </button>
               )}
             </div>
