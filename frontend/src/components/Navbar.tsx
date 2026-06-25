@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
+import { primaryButtonStyle, secondaryButtonStyle } from "../styles/common";
 
 const modules = [
   { name: "Variables, Loops and Conditions", path: "/module/01" },
@@ -8,7 +10,13 @@ const modules = [
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <nav style={{
@@ -34,9 +42,6 @@ export default function Navbar() {
         <button style={navTabStyle} onClick={() => setDropdownOpen(o => !o)}>
           Modules ▾
         </button>
-
-      <button style={navTabStyle}>Roadmap</button>
-      <button style={navTabStyle}>Profile</button>
 
         {dropdownOpen && (
           <div style={{
@@ -74,6 +79,34 @@ export default function Navbar() {
           </div>
         )}
       </div>
+
+      <button style={navTabStyle}>Roadmap</button>
+      <button style={navTabStyle}>Profile</button>
+
+      {/* Spacer */}
+      <div style={{ flex: 1 }} />
+
+      {/* Connected User */}
+      {user ? (
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <span style={{ fontSize: "0.9rem", color: "#555" }}>👤 {user}</span>
+          <button onClick={handleLogout} style={navTabStyle}>
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <button onClick={() => navigate("/login")} style={navTabStyle}>
+            Login
+          </button>
+          <button
+            onClick={() => navigate("/login?mode=register")}
+            style={secondaryButtonStyle}
+          >
+            Sign up
+          </button>
+        </div>
+      )}
     </nav>
   );
 }

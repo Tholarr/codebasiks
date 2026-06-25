@@ -1,12 +1,16 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import { exec } from "child_process";
 import { writeFileSync, unlinkSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
+import authRouter from "./routes/auth";
+
+dotenv.config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const execEnv = {
   ...process.env,
@@ -15,6 +19,8 @@ const execEnv = {
 
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
+
+app.use("/api/auth", authRouter);
 
 app.post("/api/execute", (req, res) => {
   const { code, expectedOutput, functionCall } = req.body as {
