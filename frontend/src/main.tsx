@@ -2,8 +2,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./auth/AuthContext";
+import RequireAuth from "./auth/RequireAuth";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import Module01 from "./modules/Module01";
 import Module02 from "./modules/Module02";
 import Lesson01M01 from "./lessons/module01/lesson01";
@@ -19,6 +21,7 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
 
           <Route path="/module/01" element={<Module01 />} />
           <Route path="/module/02" element={<Module02 />} />

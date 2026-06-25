@@ -15,7 +15,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -81,7 +81,9 @@ export default function Navbar() {
       </div>
 
       <button style={navTabStyle}>Roadmap</button>
-      <button style={navTabStyle}>Profile</button>
+      <button style={navTabStyle} onClick={() => navigate("/profile")}>
+        Profile
+      </button>
 
       {/* Spacer */}
       <div style={{ flex: 1 }} />

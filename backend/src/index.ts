@@ -6,6 +6,7 @@ import { writeFileSync, unlinkSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
 import authRouter from "./routes/auth";
+import userRouter from "./routes/user";
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
+
+app.use("/api/user", userRouter);
 
 app.post("/api/execute", (req, res) => {
   const { code, expectedOutput, functionCall } = req.body as {

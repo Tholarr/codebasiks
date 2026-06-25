@@ -8,8 +8,8 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // const [mode, setMode]       = useState<"login" | "register">("login");
   const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
   const [mode, setMode] = useState<"login" | "register">(
     searchParams.get("mode") === "register" ? "register" : "login"
   );
@@ -47,7 +47,7 @@ export default function Login() {
       }
 
       login(data.username, data.token);
-      navigate("/");
+      navigate(redirect);
 
     } catch {
       setError("Could not reach the server.");
