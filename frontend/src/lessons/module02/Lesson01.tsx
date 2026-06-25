@@ -23,7 +23,7 @@ export default function Lesson01() {
       <pre style={codeBlockStyle}>{`int n = 42;
 int *p = &n;  // p now holds the address of n`}</pre>
       <p>
-        The type <code>int *</code> means "a pointer to an integer" — in other words, a variable
+        The type <code>int *</code> means "a pointer to an integer"; in other words, a variable
         that stores the address of an <code>int</code>. The variable <code>p</code> itself does
         not hold <code>42</code>, it holds the address where <code>42</code> is stored.
       </p>
@@ -77,7 +77,7 @@ int main(void)
 
       <p>
         A temporary variable is often needed when swapping two values. Think about what happens if
-        you try to swap two values directly without one — the first assignment overwrites a value
+        you try to swap two values directly without one, the first assignment overwrites a value
         before it has been saved anywhere.
       </p>
 
