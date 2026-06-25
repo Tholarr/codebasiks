@@ -126,7 +126,7 @@ p[1]      // second element via indexing
       <hr style={{ margin: "2rem 0" }} />
 
       <CodeExercise
-        title="Task 04 - my_evil_str"
+        title="Task 01 - my_evil_str"
         description={<>Write a function that swaps each of the string's characters two by two: the first letter with the last one, the second with the second-to-last, and so on. The function should return a pointer to the first character of the modified string. It will be tested with the string <code>"abcdef"</code>, which should become <code>"fedcba"</code>. It must be prototyped as follows:</>}
         prototype="char *my_evil_str(char *str);"
         starterCode={starterCode4}
@@ -137,7 +137,7 @@ p[1]      // second element via indexing
       <hr style={{ margin: "2rem 0" }} />
 
       <CodeExercise
-        title="Task 05 - my_getnbr"
+        title="Task 02 - my_getnbr"
         description={<>Write a function that returns a number sent to the function as a string. It will be tested with <code>"+--42"</code>, which should return <code>42</code>, and with <code>"42a3"</code>, which should return <code>42</code>. It must be prototyped as follows:</>}
         prototype="int my_getnbr(char const *str);"
         starterCode={starterCode5}
@@ -148,7 +148,7 @@ p[1]      // second element via indexing
       <hr style={{ margin: "2rem 0" }} />
 
       <CodeExercise
-        title="Task 06 - my_sort_int_array"
+        title="Task 03 - my_sort_int_array"
         description={<>Write a function that sorts an integer array in ascending order, given a pointer to the first element of the array and its size. It will be tested with the array <code>[3, 1, 2]</code>, which should become <code>[1, 2, 3]</code>. It must be prototyped as follows:</>}
         prototype="void my_sort_int_array(int *array, int size);"
         starterCode={starterCode6}

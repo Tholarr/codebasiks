@@ -100,7 +100,7 @@ while (*str != '\\0')
       <hr style={{ margin: "2rem 0" }} />
 
       <CodeExercise
-        title="Task 02 - my_putstr"
+        title="Task 01 - my_putstr"
         description={<>Write a function that displays, one by one, the characters of a string. The address of the string's first character will be found in the pointer passed as a parameter. It will be tested with the string <code>"hello"</code>. It must be prototyped as follows:</>}
         prototype="int my_putstr(char const *str);"
         starterCode={starterCode2}
@@ -111,7 +111,7 @@ while (*str != '\\0')
       <hr style={{ margin: "2rem 0" }} />
 
       <CodeExercise
-        title="Task 03 - my_strlen"
+        title="Task 02 - my_strlen"
         description={<>Write a function that counts and returns the number of characters found in the string passed as parameter. It will be tested with the string <code>"hello"</code>, whose expected length is <code>5</code>. It must be prototyped as follows:</>}
         prototype="int my_strlen(char const *str);"
         starterCode={starterCode3}

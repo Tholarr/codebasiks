@@ -129,7 +129,7 @@ else
 
       {/* ── Exercises ── */}
       <CodeExercise
-        title="Task 04 - my_isneg"
+        title="Task 01 - my_isneg"
         description={<>Write a function that displays either <strong>N</strong> if the integer passed as parameter is negative, or <strong>P</strong> if positive or null. It must be prototyped as follows:</>}
         prototype="int my_isneg(int n);"
         starterCode={starterCode4}
@@ -140,7 +140,7 @@ else
       <hr style={{ margin: "2rem 0" }} />
 
       <CodeExercise
-        title="Task 05 - my_print_comb"
+        title="Task 02 - my_print_comb"
         description={<>Write a function that displays, in ascending order, all the numbers composed by three <strong>different</strong> digits. Given three digits (all different), only the smallest number composed by those digits must be displayed. Numbers are separated by <code>, </code> but not after the last one. It must be prototyped as follows:</>}
         prototype="int my_print_comb(void);"
         starterCode={starterCode5}
@@ -151,7 +151,7 @@ else
       <hr style={{ margin: "2rem 0" }} />
 
       <CodeExercise
-        title="Task 06 - my_print_comb2"
+        title="Task 03 - my_print_comb2"
         description={<>Write a function that displays, in ascending order, all the different combinations of two two-digit numbers. Combinations are separated by <code>, </code> but not after the last one. It must be prototyped as follows:</>}
         prototype="int my_print_comb2(void);"
         starterCode={starterCode6}
