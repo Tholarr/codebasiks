@@ -3,7 +3,6 @@ import QuizQuestion from "../../components/QuizQuestion";
 import CodeExercise from "../../components/CodeExercise";
 import { codeBlockStyle } from "../../styles/common";
 
-// Expected outputs generated in JS to avoid hardcoding long strings
 const combOutput = (() => {
   const results: string[] = [];
   for (let i = 0; i <= 7; i++)
