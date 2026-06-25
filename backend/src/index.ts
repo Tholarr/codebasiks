@@ -7,6 +7,7 @@ import { join } from "path";
 import { tmpdir } from "os";
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
+import progressRouter from "./routes/progress";
 
 dotenv.config();
 
@@ -21,9 +22,10 @@ const execEnv = {
 app.use(cors({origin: ["http://localhost:5173", "https://codebasiks.vercel.app"]}));
 app.use(express.json());
 
+// Routes
 app.use("/api/auth", authRouter);
-
 app.use("/api/user", userRouter);
+app.use("/api/progress", progressRouter);
 
 app.post("/api/execute", (req, res) => {
   const { code, expectedOutput, functionCall } = req.body as {
