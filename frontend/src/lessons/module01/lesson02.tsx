@@ -47,7 +47,7 @@ int my_print_comb2(void)
 
 export default function Lesson02() {
   return (
-    <LessonLayout title="Conditions, parameters and nested loops" prevPath="/module/01/lesson/01" nextPath="/module/01/lesson/03">
+    <LessonLayout title="Conditions, parameters and nested loops" prevPath="/module/01/lesson/01" nextPath="/module/02/lesson/01">
 
       {/* ── Lesson content ── */}
       <p>
