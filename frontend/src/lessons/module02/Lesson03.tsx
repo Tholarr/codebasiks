@@ -29,7 +29,7 @@ void my_sort_int_array(int *array, int size)
 
 export default function Lesson03() {
   return (
-    <LessonLayout title="String manipulation and arrays" lessonId="module02-lesson03" total={4} modulePath="/module/02" prevPath="/module/02/lesson/02">
+    <LessonLayout title="String manipulation and arrays" lessonId="module02-lesson03" total={4} modulePath="/module/02" prevPath="/module/02/lesson/02" nextPath="/">
       {(progress) => (
         <>
           <p>

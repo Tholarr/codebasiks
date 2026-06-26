@@ -49,6 +49,22 @@ router.get("/:lessonId", requireAuth, async (req: any, res: Response) => {
   }
 });
 
+// GET /api/progress/module/:moduleId - fetch progress for all lessons in a module
+router.get("/module/:moduleId", requireAuth, async (req: any, res: Response) => {
+  const { moduleId } = req.params;
+  const userId = req.user.id;
+
+  try {
+    const result = await pool.query(
+      "SELECT lesson_id, completed, score, total FROM lesson_progress WHERE user_id = $1 AND lesson_id LIKE $2",
+      [userId, `${moduleId}-%`]
+    );
+    res.json(result.rows);
+  } catch {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // POST /api/progress/:lessonId - save progress when user clicks Next
 router.post("/:lessonId", requireAuth, async (req: any, res: Response) => {
   const { lessonId } = req.params;
@@ -63,14 +79,15 @@ router.post("/:lessonId", requireAuth, async (req: any, res: Response) => {
   try {
     // Score = correct quiz + successful exercises
     const score = (quizCorrect ? 1 : 0) + exercises.filter(e => e.success).length;
+    const allSuccess = (quizCorrect ? 1 : 0) + exercises.filter(e => e.success).length === total;
 
     // Upsert lesson progress
     await pool.query(
       `INSERT INTO lesson_progress (user_id, lesson_id, completed, score, total, updated_at)
-       VALUES ($1, $2, true, $3, $4, NOW())
-       ON CONFLICT (user_id, lesson_id)
-       DO UPDATE SET completed = true, score = $3, total = $4, updated_at = NOW()`,
-      [userId, lessonId, score, total]
+      VALUES ($1, $2, $3, $4, $5, NOW())
+      ON CONFLICT (user_id, lesson_id)
+      DO UPDATE SET completed = $3, score = $4, total = $5, updated_at = NOW()`,
+      [userId, lessonId, allSuccess, score, total]
     );
 
     // Upsert quiz answer if provided

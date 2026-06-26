@@ -64,13 +64,36 @@ export function useProgress(lessonId: string, total: number) {
   // Called when user clicks Next - saves everything to DB
   const saveProgress = async () => {
     if (!token) return;
+
+    // Merge session exercises with already saved ones from DB
+    const savedExercises = saved?.exercises.map(e => ({
+      taskId: e.task_id,
+      code: e.code,
+      success: e.success,
+    })) || [];
+
+    const mergedExercises = [...savedExercises];
+    for (const ex of exercises) {
+      const exists = mergedExercises.find(e => e.taskId === ex.taskId);
+      if (exists) {
+        Object.assign(exists, ex);
+      } else {
+        mergedExercises.push(ex);
+      }
+    }
+
     await fetch(`/api/progress/${lessonId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ total, quizAnswer, quizCorrect, exercises }),
+      body: JSON.stringify({
+        total,
+        quizAnswer,
+        quizCorrect,
+        exercises: mergedExercises,
+      }),
     });
   };
 
