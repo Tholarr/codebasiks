@@ -116,7 +116,12 @@ export default function Home() {
         <Navbar />
 
         <div style={{ maxWidth: 860, margin: "0 auto", padding: "2rem", lineHeight: 1.7 }}>
-          <h1 style={{ marginTop: "1.5rem", marginBottom: "0.5rem" }}>CodeBasiks</h1>
+          <h1 style={{ marginTop: "1.5rem", marginBottom: "1.5rem" }}>CodeBasiks</h1>
+          {user && (
+            <p style={{ fontSize: "1.1rem", color: "#2e7d32", marginBottom: "0.25rem" }}>
+              Welcome back, {user}!
+            </p>
+          )}
           <p style={{ color: "#555", marginBottom: "3rem" }}>
             Learn programming fundamentals step by step, through interactive lessons and real coding exercises.
           </p>
