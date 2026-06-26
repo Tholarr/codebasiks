@@ -3,6 +3,7 @@ import { primaryButtonStyle, secondaryButtonStyle } from "../styles/common";
 import PageWrapper from "./PageWrapper";
 import Navbar from "./Navbar";
 import { useProgress } from "../hooks/useProgress";
+import { useAuth } from "../auth/AuthContext";
 
 type Props = {
   title: string;
@@ -16,6 +17,7 @@ type Props = {
 
 export default function LessonLayout({ title, lessonId, total, modulePath, prevPath, nextPath, children }: Props) {
   const navigate = useNavigate();
+  const { token, user } = useAuth();
   const progress = useProgress(lessonId, total);
 
   const go = (path: string) => {
@@ -28,13 +30,29 @@ export default function LessonLayout({ title, lessonId, total, modulePath, prevP
     go(path);
   };
 
+  const handleReset = async () => {
+    if (!confirm("Reset your progress on this lesson?")) return;
+    await fetch(`/api/progress/${lessonId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    window.location.reload();
+  };
+
   return (
     <PageWrapper>
       <Navbar />
       <div style={{ maxWidth: 740, margin: "0 auto", padding: "2rem", lineHeight: 1.7 }}>
-        <button onClick={() => go(modulePath)} style={secondaryButtonStyle}>
-          ← Back to Module
-        </button>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <button onClick={() => go(modulePath)} style={secondaryButtonStyle}>
+            ← Back to Module
+          </button>
+          {user && (
+            <button onClick={handleReset} style={{ ...secondaryButtonStyle, color: "#c62828" }}>
+              Reset progress
+            </button>
+          )}
+        </div>
 
         <h1 style={{ marginTop: "1.5rem" }}>{title}</h1>
 

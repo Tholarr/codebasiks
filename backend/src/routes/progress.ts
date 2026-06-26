@@ -121,4 +121,22 @@ router.post("/:lessonId", requireAuth, async (req: any, res: Response) => {
   }
 });
 
+// DELETE /api/progress/:lessonId - reset lesson progress
+router.delete("/:lessonId", requireAuth, async (req: any, res: Response) => {
+  const { lessonId } = req.params;
+  const userId = req.user.id;
+
+  try {
+    await Promise.all([
+      pool.query("DELETE FROM lesson_progress WHERE user_id = $1 AND lesson_id = $2", [userId, lessonId]),
+      pool.query("DELETE FROM quiz_answers WHERE user_id = $1 AND lesson_id = $2", [userId, lessonId]),
+      pool.query("DELETE FROM exercise_submissions WHERE user_id = $1 AND lesson_id = $2", [userId, lessonId]),
+    ]);
+
+    res.json({ success: true });
+  } catch {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 export default router;
