@@ -6,7 +6,7 @@ import { sendInactivityEmail } from "../mail";
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
 
-// Middleware that check JWT token
+// Middleware that checks JWT token
 function requireAuth(req: any, res: Response, next: any) {
   const auth = req.headers.authorization;
   if (!auth || !auth.startsWith("Bearer "))
@@ -37,7 +37,46 @@ router.get("/me", requireAuth, async (req: any, res: Response) => {
   }
 });
 
-// POST /api/user/test-email — send a test inactivity email
+// GET /api/user/stats
+router.get("/stats", requireAuth, async (req: any, res: Response) => {
+  const userId = req.user.id;
+
+  try {
+    const [lessonsResult, scoreResult, totalResult, totalLessonsResult] = await Promise.all([
+      pool.query(
+        "SELECT COUNT(*) as completed FROM lesson_progress WHERE user_id = $1 AND completed = true",
+        [userId]
+      ),
+      pool.query(
+        "SELECT COALESCE(SUM(score), 0) as total_score FROM lesson_progress WHERE user_id = $1",
+        [userId]
+      ),
+      pool.query(
+        "SELECT COALESCE(SUM(total), 0) as total_possible FROM lesson_totals"
+      ),
+      pool.query(
+        "SELECT COUNT(*) as total FROM lesson_totals"
+      ),
+    ]);
+
+    const lessonsCompleted = parseInt(lessonsResult.rows[0].completed);
+    const totalScore = parseInt(scoreResult.rows[0].total_score);
+    const totalPossible = parseInt(totalResult.rows[0].total_possible);
+    const globalPct = totalPossible > 0 ? Math.round((totalScore / totalPossible) * 100) : 0;
+    const totalLessons = parseInt(totalLessonsResult.rows[0].total);
+
+    res.json({
+      lessonsCompleted,
+      totalLessons,
+      globalPct,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// POST /api/user/test-email
 router.post("/test-email", requireAuth, async (req: any, res: Response) => {
   try {
     const result = await pool.query(

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import Navbar from "../components/Navbar";
 import PageWrapper from "../components/PageWrapper";
-import { secondaryButtonStyle } from "../styles/common";
-import { navTabStyle } from "../styles/common";
+import { secondaryButtonStyle, navTabStyle } from "../styles/common";
 
 type UserInfo = {
   id: number;
@@ -11,9 +10,16 @@ type UserInfo = {
   created_at: string;
 };
 
+type UserStats = {
+  lessonsCompleted: number;
+  totalLessons: number;
+  globalPct: number;
+};
+
 export default function Profile() {
   const { token, logout } = useAuth();
   const [info, setInfo] = useState<UserInfo | null>(null);
+  const [stats, setStats] = useState<UserStats | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const [mailSent, setMailSent] = useState(false);
@@ -29,6 +35,15 @@ export default function Profile() {
         else setInfo(data);
       })
       .catch(() => setError("Could not reach the server."));
+
+    fetch("/api/user/stats", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.error) setStats(data);
+      })
+      .catch(console.error);
   }, [token]);
 
   const handleLogout = () => {
@@ -73,11 +88,12 @@ export default function Profile() {
 
         {info && (
           <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+
+            {/* Account info */}
             <div style={rowStyle}>
               <span style={labelStyle}>Username</span>
               <span style={valueStyle}>👤 {info.username}</span>
             </div>
-
             <div style={rowStyle}>
               <span style={labelStyle}>Member since</span>
               <span style={valueStyle}>
@@ -88,24 +104,52 @@ export default function Profile() {
                 })}
               </span>
             </div>
-
             <div style={rowStyle}>
               <span style={labelStyle}>User ID</span>
               <span style={{ ...valueStyle, color: "#aaa", fontSize: "0.85rem" }}>#{info.id}</span>
             </div>
 
-            <hr style={{ margin: "0.5rem 0", borderColor: "#eee" }} />
+            {/* Stats */}
+            {stats && (
+              <>
+                <hr style={{ margin: "0.25rem 0", borderColor: "#eee" }} />
+                <h2 style={{ fontSize: "1rem", margin: "0.25rem 0", color: "#555" }}>Progress</h2>
+
+                <div style={rowStyle}>
+                  <span style={labelStyle}>Lessons completed</span>
+                  <span style={valueStyle}>{stats.lessonsCompleted} / {stats.totalLessons}</span>
+                </div>
+
+                <div style={rowStyle}>
+                  <span style={labelStyle}>Overall progress</span>
+                  <span style={valueStyle}>{stats.globalPct}%</span>
+                </div>
+
+                {/* Progress bar */}
+                <div style={{ height: 8, backgroundColor: "#eee", borderRadius: 4, overflow: "hidden" }}>
+                  <div style={{
+                    height: "100%",
+                    width: `${stats.globalPct}%`,
+                    backgroundColor: "#2e7d32",
+                    borderRadius: 4,
+                    transition: "width 0.5s ease",
+                  }} />
+                </div>
+              </>
+            )}
+
+            <hr style={{ margin: "0.25rem 0", borderColor: "#eee" }} />
 
             <button
               onClick={sendTestEmail}
               disabled={sending}
-              style={{ ...navTabStyle, marginTop: "0.5rem", opacity: sending ? 0.7 : 1 }}
+              style={{ ...navTabStyle, opacity: sending ? 0.7 : 1 }}
             >
               {sending ? "Sending..." : "Send test email"}
             </button>
 
-            {mailSent && <p style={{ color: "#2e7d32", fontSize: "0.875rem", marginTop: "0.5rem" }}>✅ Email sent!</p>}
-            {mailError && <p style={{ color: "#c62828", fontSize: "0.875rem", marginTop: "0.5rem" }}>❌ {mailError}</p>}
+            {mailSent && <p style={{ color: "#2e7d32", fontSize: "0.875rem" }}>✅ Email sent!</p>}
+            {mailError && <p style={{ color: "#c62828", fontSize: "0.875rem" }}>❌ {mailError}</p>}
 
             <button onClick={handleLogout} style={secondaryButtonStyle}>
               Logout
