@@ -5,8 +5,8 @@ import { secondaryButtonStyle } from "../styles/common";
 import { navTabStyle } from "../styles/common";
 
 const modules = [
-  { name: "Variables, Loops and Conditions", path: "/module/01" },
-  { name: "Pointers", path: "/module/02" },
+  { name: "Variables, Loops and Conditions", path: "/module/01", icon: "🔤" },
+  { name: "Pointers", path: "/module/02", icon: "📍" },
 ];
 
 export default function Navbar() {
@@ -53,7 +53,7 @@ export default function Navbar() {
             border: "1px solid #ddd",
             borderRadius: "6px",
             boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-            minWidth: "260px",
+            minWidth: "300px",
             zIndex: 200,
           }}>
             {modules.map((mod, i) => (
@@ -61,7 +61,9 @@ export default function Navbar() {
                 key={mod.path}
                 onClick={() => { setDropdownOpen(false); window.scrollTo(0, 0); navigate(mod.path); }}
                 style={{
-                  display: "block",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
                   width: "100%",
                   padding: "0.75rem 1rem",
                   textAlign: "left",
@@ -74,6 +76,7 @@ export default function Navbar() {
                 onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f5f5f5")}
                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
               >
+                <span>{mod.icon}</span>
                 {mod.name}
               </button>
             ))}
