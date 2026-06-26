@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
 import PageWrapper from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import { useModuleProgress } from "../hooks/useModuleProgress";
@@ -24,6 +25,7 @@ const modules = [
 
 function ModuleCard({ mod }: { mod: typeof modules[0] }) {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { stars } = useModuleProgress(mod.moduleId);
   const starsCount = stars(mod.totalPerLesson);
   const starsDisplay = "★".repeat(starsCount) + "☆".repeat(3 - starsCount);
@@ -51,7 +53,7 @@ function ModuleCard({ mod }: { mod: typeof modules[0] }) {
         fontSize: "2rem",
       }}>
         <span>{mod.icon}</span>
-        <span style={{ fontSize: "1.1rem", color: "#f5a623" }}>{starsDisplay}</span>
+        {user && <span style={{ fontSize: "1.1rem", color: "#f5a623" }}>{starsDisplay}</span>}
       </div>
 
       <div style={{ padding: "1rem" }}>
@@ -106,6 +108,8 @@ function InProgressCard({ mod }: { mod: typeof modules[0] }) {
 }
 
 export default function Home() {
+  const { user } = useAuth();
+
   return (
     <PageWrapper>
       <div style={{ fontFamily: "sans-serif" }}>
@@ -118,15 +122,19 @@ export default function Home() {
           </p>
 
           {/* Continue learning section — cards hide themselves if not in progress */}
-          <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "1rem" }}>
-            <h2 style={{ margin: 0, fontSize: "1.2rem" }}>Continue learning</h2>
-            <div style={{ flex: 1, height: "1px", backgroundColor: "#ddd" }} />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "3rem" }}>
-            {modules.map(mod => (
-              <InProgressCard key={mod.moduleId} mod={mod} />
-            ))}
-          </div>
+          {user && (
+            <>
+              <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "1rem" }}>
+                <h2 style={{ margin: 0, fontSize: "1.2rem" }}>Continue learning</h2>
+                <div style={{ flex: 1, height: "1px", backgroundColor: "#ddd" }} />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "3rem" }}>
+                {modules.map(mod => (
+                  <InProgressCard key={mod.moduleId} mod={mod} />
+                ))}
+              </div>
+            </>
+          )}
 
           {/* All modules */}
           <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "1rem" }}>

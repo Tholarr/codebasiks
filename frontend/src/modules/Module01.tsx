@@ -13,6 +13,7 @@ export default function Module01() {
           path: "/module/01/lesson/01",
           icon: "🔤",
           lessonId: "module01-lesson01",
+          total: 4,
         },
         {
           title: "Lesson 02 - Conditions, parameters and nested loops",
@@ -20,6 +21,7 @@ export default function Module01() {
           path: "/module/01/lesson/02",
           icon: "🔁",
           lessonId: "module01-lesson02",
+          total: 4,
         },
       ]}
     />

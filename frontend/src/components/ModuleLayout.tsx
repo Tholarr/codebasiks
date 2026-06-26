@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
 import Navbar from "./Navbar";
 import PageWrapper from "./PageWrapper";
 import { secondaryButtonStyle } from "../styles/common";
@@ -22,7 +23,8 @@ type Props = {
 
 export default function ModuleLayout({ title, moduleId, description, lessons }: Props) {
   const navigate = useNavigate();
-  const { isCompleted, stars } = useModuleProgress(moduleId);
+  const { user } = useAuth();
+  const { isCompleted, stars, loaded } = useModuleProgress(moduleId);
   const totalPerLesson = lessons.map(l => l.total);
   const starsDisplay = "★".repeat(stars(totalPerLesson)) + "☆".repeat(3 - stars(totalPerLesson));
 
@@ -36,7 +38,7 @@ export default function ModuleLayout({ title, moduleId, description, lessons }: 
 
         <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1.5rem" }}>
           <h1 style={{ margin: 0 }}>{title}</h1>
-          <span style={{ fontSize: "1.5rem", color: "#f5a623" }}>{starsDisplay}</span>
+          {user && loaded && <span style={{ fontSize: "1.5rem", color: "#f5a623" }}>{starsDisplay}</span>}
         </div>
         <p style={{ color: "#555", marginBottom: "2rem" }}>{description}</p>
 

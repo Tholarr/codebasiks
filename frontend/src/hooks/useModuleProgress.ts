@@ -11,15 +11,20 @@ type LessonProgress = {
 export function useModuleProgress(moduleId: string) {
   const { token } = useAuth();
   const [progress, setProgress] = useState<LessonProgress[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      setLoaded(true);
+      return;
+    }
     fetch(`/api/progress/module/${moduleId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
       .then(setProgress)
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoaded(true));
   }, [moduleId, token]);
 
   const isCompleted = (lessonId: string) =>
@@ -38,5 +43,5 @@ export function useModuleProgress(moduleId: string) {
     return 0;
   };
 
-  return { isCompleted, stars };
+  return { isCompleted, stars, loaded };
 }
