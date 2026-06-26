@@ -25,7 +25,8 @@ const modules = [
 function ModuleCard({ mod }: { mod: typeof modules[0] }) {
   const navigate = useNavigate();
   const { stars } = useModuleProgress(mod.moduleId);
-  const starsDisplay = "★".repeat(stars(mod.totalPerLesson)) + "☆".repeat(3 - stars(mod.totalPerLesson));
+  const starsCount = stars(mod.totalPerLesson);
+  const starsDisplay = "★".repeat(starsCount) + "☆".repeat(3 - starsCount);
 
   return (
     <div
@@ -65,6 +66,45 @@ function ModuleCard({ mod }: { mod: typeof modules[0] }) {
   );
 }
 
+function InProgressCard({ mod }: { mod: typeof modules[0] }) {
+  const navigate = useNavigate();
+  const { stars } = useModuleProgress(mod.moduleId);
+  const starsCount = stars(mod.totalPerLesson);
+
+  if (starsCount === 0 || starsCount === 3) return null;
+
+  return (
+    <div
+      onClick={() => { window.scrollTo(0, 0); navigate(mod.path); }}
+      style={{
+        border: "1px solid #f5a623",
+        borderRadius: "8px",
+        padding: "1rem 1.25rem",
+        display: "flex",
+        alignItems: "center",
+        gap: "1rem",
+        cursor: "pointer",
+        transition: "box-shadow 0.2s",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.08)")}
+      onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}
+    >
+      <span style={{ fontSize: "1.75rem" }}>{mod.icon}</span>
+      <div style={{ flex: 1 }}>
+        <p style={{ margin: 0, fontWeight: "bold", fontSize: "0.95rem", color: "#333" }}>
+          {mod.name}
+        </p>
+        <p style={{ margin: 0, fontSize: "0.8rem", color: "#888" }}>
+          {"★".repeat(starsCount)}{"☆".repeat(3 - starsCount)}
+        </p>
+      </div>
+      <span style={{ fontSize: "0.85rem", color: "#f5a623", fontWeight: "bold" }}>
+        Continue →
+      </span>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <PageWrapper>
@@ -77,11 +117,22 @@ export default function Home() {
             Learn programming fundamentals step by step, through interactive lessons and real coding exercises.
           </p>
 
+          {/* Continue learning section — cards hide themselves if not in progress */}
+          <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "1rem" }}>
+            <h2 style={{ margin: 0, fontSize: "1.2rem" }}>Continue learning</h2>
+            <div style={{ flex: 1, height: "1px", backgroundColor: "#ddd" }} />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "3rem" }}>
+            {modules.map(mod => (
+              <InProgressCard key={mod.moduleId} mod={mod} />
+            ))}
+          </div>
+
+          {/* All modules */}
           <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "1rem" }}>
             <h2 style={{ margin: 0, fontSize: "1.2rem" }}>Modules</h2>
             <div style={{ flex: 1, height: "1px", backgroundColor: "#ddd" }} />
           </div>
-
           <div style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
