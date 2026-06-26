@@ -14,6 +14,7 @@ import Lesson02M01 from "./lessons/module01/Lesson02";
 import Lesson01M02 from "./lessons/module02/Lesson01";
 import Lesson02M02 from "./lessons/module02/Lesson02";
 import Lesson03M02 from "./lessons/module02/Lesson03";
+import NotFound from "./pages/NotFound";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -36,6 +37,8 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/module/02/lesson/01" element={<Lesson01M02 />} />
           <Route path="/module/02/lesson/02" element={<Lesson02M02 />} />
           <Route path="/module/02/lesson/03" element={<Lesson03M02 />} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
