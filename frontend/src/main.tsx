@@ -6,6 +6,7 @@ import RequireAuth from "./auth/RequireAuth";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Roadmap from "./pages/Roadmap";
 import Module01 from "./modules/Module01";
 import Module02 from "./modules/Module02";
 import Lesson01M01 from "./lessons/module01/Lesson01";
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+          <Route path="/roadmap" element={<RequireAuth><Roadmap /></RequireAuth>} />
 
           <Route path="/module/01" element={<Module01 />} />
           <Route path="/module/02" element={<Module02 />} />

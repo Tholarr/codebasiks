@@ -80,7 +80,10 @@ export default function Navbar() {
         )}
       </div>
 
-      <button style={navTabStyle}>Roadmap</button>
+      <button style={navTabStyle} onClick={() => navigate("/roadmap")}>
+        Roadmap
+      </button>
+
       <button style={navTabStyle} onClick={() => navigate("/profile")}>
         Profile
       </button>
