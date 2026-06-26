@@ -14,6 +14,7 @@ export default function Login() {
     searchParams.get("mode") === "register" ? "register" : "login"
   );
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm]   = useState("");
   const [error, setError]       = useState<string | null>(null);
@@ -22,10 +23,20 @@ export default function Login() {
   const handleSubmit = async () => {
     setError(null);
 
-    if (!username.trim() || !password.trim()) {
+    if (mode === "register" && (!username.trim() || !password.trim() || !email.trim())) {
+      setError("Please fill in all fields.");
+      return;
+    } else if (!username.trim() || !password.trim()) {
       setError("Please fill in all fields.");
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (mode === "register" && !emailRegex.test(email.trim())) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
     if (mode === "register" && password !== confirm) {
       setError("Passwords do not match.");
       return;
@@ -36,7 +47,7 @@ export default function Login() {
       const res = await fetch(`/api/auth/${mode}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: username.trim(), password }),
+        body: JSON.stringify({ username: username.trim(), password, email: email.trim() }),
       });
 
       const data = await res.json();
@@ -107,6 +118,19 @@ export default function Login() {
               style={inputStyle}
             />
           </div>
+
+          {mode === "register" && (
+            <div>
+              <label style={labelStyle}>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                style={inputStyle}
+              />
+            </div>
+          )}
 
           <div>
             <label style={labelStyle}>Password</label>

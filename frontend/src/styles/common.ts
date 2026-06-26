@@ -29,3 +29,13 @@ export const secondaryButtonStyle: CSSProperties = {
   border: "none",
   borderRadius: "6px",
 };
+
+export const navTabStyle: React.CSSProperties = {
+  padding: "0.4rem 0.9rem",
+  fontSize: "0.9rem",
+  background: "none",
+  border: "none",
+  borderRadius: "4px",
+  cursor: "pointer",
+  color: "#333",
+};

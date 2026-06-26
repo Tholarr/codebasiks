@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
-import { primaryButtonStyle, secondaryButtonStyle } from "../styles/common";
+import { secondaryButtonStyle } from "../styles/common";
+import { navTabStyle } from "../styles/common";
 
 const modules = [
   { name: "Variables, Loops and Conditions", path: "/module/01" },
@@ -115,13 +116,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-const navTabStyle: React.CSSProperties = {
-  padding: "0.4rem 0.9rem",
-  fontSize: "0.9rem",
-  background: "none",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  color: "#333",
-};

@@ -5,9 +5,12 @@ import { exec } from "child_process";
 import { writeFileSync, unlinkSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
+import cron from "node-cron";
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
 import progressRouter from "./routes/progress";
+import { pool } from "./db";
+import { sendInactivityEmail } from "./mail";
 
 dotenv.config();
 
@@ -19,13 +22,18 @@ const execEnv = {
   PATH: `C:\\msys64\\mingw64\\bin;${process.env.PATH}`,
 };
 
-app.use(cors({origin: ["http://localhost:5173", "https://codebasiks.vercel.app"]}));
+app.use(cors({ origin: ["http://localhost:5173", "https://codebasiks.vercel.app"] }));
 app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/progress", progressRouter);
+
+// Ping route to keep Render awake
+app.get("/api/ping", (req, res) => {
+  res.json({ message: "pong" });
+});
 
 app.post("/api/execute", (req, res) => {
   const { code, expectedOutput, functionCall } = req.body as {
@@ -74,5 +82,38 @@ int main(void)
 function cleanup(...paths: string[]) {
   paths.forEach(p => { try { unlinkSync(p); } catch {} });
 }
+
+// Keep Render awake by pinging itself every 10 minutes
+cron.schedule("*/10 * * * *", async () => {
+  try {
+    await fetch(`https://codebasiks.onrender.com/api/ping`);
+    console.log(">> Keep-alive ping sent");
+  } catch {}
+});
+
+// Run inactivity check every day at 9am
+cron.schedule("0 9 * * *", async () => {
+  console.log(">> Running inactivity check...");
+  try {
+    const result = await pool.query(`
+      SELECT id, username, email, last_active
+      FROM users
+      WHERE email IS NOT NULL
+      AND last_active < NOW() - INTERVAL '24 hours'
+    `);
+
+    for (const user of result.rows) {
+      const daysSince = Math.floor(
+        (Date.now() - new Date(user.last_active).getTime()) / (1000 * 60 * 60 * 24)
+      );
+      await sendInactivityEmail(user.email, user.username, daysSince);
+      console.log(`>> Email sent to ${user.username}`);
+    }
+
+    console.log(`>> Done - ${result.rows.length} email(s) sent`);
+  } catch (error) {
+    console.error("Inactivity job error:", error);
+  }
+});
 
 app.listen(PORT, () => console.log(`🚀 Backend running on http://localhost:${PORT}`));

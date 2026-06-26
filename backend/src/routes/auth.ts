@@ -8,9 +8,13 @@ const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
 
 // Register
 router.post("/register", async (req: Request, res: Response) => {
-  const { username, password } = req.body as { username: string; password: string };
+  const { username, password, email } = req.body as {
+    username: string;
+    password: string;
+    email?: string;
+  };
 
-  if (!username || !password)
+  if (!username || !password || (req.body.email !== undefined && !req.body.email))
     return res.status(400).json({ error: "Missing fields" });
 
   try {
@@ -20,8 +24,8 @@ router.post("/register", async (req: Request, res: Response) => {
 
     const password_hash = await bcrypt.hash(password, 10);
     const result = await pool.query(
-      "INSERT INTO users (username, password_hash) VALUES ($1, $2) RETURNING id, username",
-      [username, password_hash]
+      "INSERT INTO users (username, password_hash, email) VALUES ($1, $2, $3) RETURNING id, username",
+      [username, password_hash, email || null]
     );
 
     const token = jwt.sign({ id: result.rows[0].id, username }, JWT_SECRET, { expiresIn: "7d" });
@@ -49,11 +53,13 @@ router.post("/login", async (req: Request, res: Response) => {
     if (!valid)
       return res.status(401).json({ error: "Invalid username or password" });
 
+    // Update last_active on every login
+    await pool.query("UPDATE users SET last_active = NOW() WHERE id = $1", [user.id]);
+
     const token = jwt.sign({ id: user.id, username }, JWT_SECRET, { expiresIn: "7d" });
     res.json({ token, username });
 
   } catch (error) {
-    console.error("Register error:", error);
     res.status(500).json({ error: "Server error" });
   }
 });

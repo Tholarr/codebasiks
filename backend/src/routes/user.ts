@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { pool } from "../db";
+import { sendInactivityEmail } from "../mail";
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
@@ -32,6 +33,28 @@ router.get("/me", requireAuth, async (req: any, res: Response) => {
 
     res.json(result.rows[0]);
   } catch {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// POST /api/user/test-email — send a test inactivity email
+router.post("/test-email", requireAuth, async (req: any, res: Response) => {
+  try {
+    const result = await pool.query(
+      "SELECT username, email FROM users WHERE id = $1",
+      [req.user.id]
+    );
+
+    const user = result.rows[0];
+
+    if (!user.email)
+      return res.status(400).json({ error: "No email address on your account." });
+
+    await sendInactivityEmail(user.email, user.username, 1);
+    res.json({ success: true });
+
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 });

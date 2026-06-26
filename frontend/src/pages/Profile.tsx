@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import Navbar from "../components/Navbar";
 import PageWrapper from "../components/PageWrapper";
 import { secondaryButtonStyle } from "../styles/common";
+import { navTabStyle } from "../styles/common";
 
 type UserInfo = {
   id: number;
@@ -13,9 +13,11 @@ type UserInfo = {
 
 export default function Profile() {
   const { token, logout } = useAuth();
-  const navigate = useNavigate();
   const [info, setInfo] = useState<UserInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [sending, setSending] = useState(false);
+  const [mailSent, setMailSent] = useState(false);
+  const [mailError, setMailError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/user/me", {
@@ -32,6 +34,25 @@ export default function Profile() {
   const handleLogout = () => {
     logout();
     window.location.href = "/";
+  };
+
+  const sendTestEmail = async () => {
+    setSending(true);
+    setMailSent(false);
+    setMailError(null);
+    try {
+      const res = await fetch("/api/user/test-email", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (!res.ok) setMailError(data.error);
+      else setMailSent(true);
+    } catch {
+      setMailError("Could not reach the server.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -74,6 +95,17 @@ export default function Profile() {
             </div>
 
             <hr style={{ margin: "0.5rem 0", borderColor: "#eee" }} />
+
+            <button
+              onClick={sendTestEmail}
+              disabled={sending}
+              style={{ ...navTabStyle, marginTop: "0.5rem", opacity: sending ? 0.7 : 1 }}
+            >
+              {sending ? "Sending..." : "Send test email"}
+            </button>
+
+            {mailSent && <p style={{ color: "#2e7d32", fontSize: "0.875rem", marginTop: "0.5rem" }}>✅ Email sent!</p>}
+            {mailError && <p style={{ color: "#c62828", fontSize: "0.875rem", marginTop: "0.5rem" }}>❌ {mailError}</p>}
 
             <button onClick={handleLogout} style={secondaryButtonStyle}>
               Logout
