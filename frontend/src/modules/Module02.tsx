@@ -24,12 +24,20 @@ export default function Module02() {
           total: 3,
         },
         {
-          title: "Lesson 03 - String manipulation and arrays",
-          description: "Go further with pointer arithmetic, in-place string manipulation, type conversion, and pointers to integer arrays.",
+          title: "Lesson 03 - Pointer arithmetic and string manipulation",
+          description: "Go further with pointer arithmetic and learn how to manipulate strings in place using the man pages as reference.",
           path: "/module/02/lesson/03",
           icon: "🧮",
           lessonId: "module02-lesson03",
-          total: 4,
+          total: 2,
+        },
+        {
+          title: "Lesson 04 - Parsing and sorting",
+          description: "Learn how to convert strings to integers and sort integer arrays using pointers.",
+          path: "/module/02/lesson/04",
+          icon: "🔢",
+          lessonId: "module02-lesson04",
+          total: 3,
         },
       ]}
     />

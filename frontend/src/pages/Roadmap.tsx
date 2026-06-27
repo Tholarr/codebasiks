@@ -24,10 +24,11 @@ const modules: Module[] = [
     title: "Variables, Loops and Conditions",
     icon: "🔤",
     path: "/module/01",
-    totalPerLesson: [4, 4],
+    totalPerLesson: [4, 2, 3],
     lessons: [
-      { id: "module01-lesson01", title: "Characters and loops in C", path: "/module/01/lesson/01" },
-      { id: "module01-lesson02", title: "Conditions, parameters and nested loops", path: "/module/01/lesson/02" },
+      { id: "module01-lesson01", title: "Characters and loops", path: "/module/01/lesson/01" },
+      { id: "module01-lesson02", title: "Conditions and parameters", path: "/module/01/lesson/02" },
+      { id: "module01-lesson03", title: "Nested loops", path: "/module/01/lesson/03" },
     ],
   },
   {
@@ -35,11 +36,12 @@ const modules: Module[] = [
     title: "Pointers",
     icon: "📍",
     path: "/module/02",
-    totalPerLesson: [2, 3, 4],
+    totalPerLesson: [2, 3, 2, 3],
     lessons: [
-      { id: "module02-lesson01", title: "Introduction to pointers", path: "/module/02/lesson/01" },
+      { id: "module02-lesson01", title: "Intro to pointers", path: "/module/02/lesson/01" },
       { id: "module02-lesson02", title: "Pointers and strings", path: "/module/02/lesson/02" },
-      { id: "module02-lesson03", title: "String manipulation and arrays", path: "/module/02/lesson/03" },
+      { id: "module02-lesson03", title: "Pointer arithmetic", path: "/module/02/lesson/03" },
+      { id: "module02-lesson04", title: "Parsing and sorting", path: "/module/02/lesson/04" },
     ],
   },
     {
