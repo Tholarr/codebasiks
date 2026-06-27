@@ -13,6 +13,7 @@ import Module02 from "./modules/Module02";
 import Module03 from "./modules/Module03";
 import Lesson01M01 from "./lessons/module01/Lesson01";
 import Lesson02M01 from "./lessons/module01/Lesson02";
+import Lesson03M01 from "./lessons/module01/Lesson03";
 import Lesson01M02 from "./lessons/module02/Lesson01";
 import Lesson02M02 from "./lessons/module02/Lesson02";
 import Lesson03M02 from "./lessons/module02/Lesson03";
@@ -41,6 +42,7 @@ createRoot(document.getElementById("root")!).render(
             {/* Module 01 */}
             <Route path="/module/01/lesson/01" element={<Lesson01M01 />} />
             <Route path="/module/01/lesson/02" element={<Lesson02M01 />} />
+            <Route path="/module/01/lesson/03" element={<Lesson03M01 />} />
 
             {/* Module 02 */}
             <Route path="/module/02/lesson/01" element={<Lesson01M02 />} />

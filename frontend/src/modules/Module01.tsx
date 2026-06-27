@@ -16,12 +16,20 @@ export default function Module01() {
           total: 4,
         },
         {
-          title: "Lesson 02 - Conditions, parameters and nested loops",
-          description: "Learn how to pass parameters to functions, use if/else to make decisions, and combine loops to explore combinations.",
+          title: "Lesson 02 - Conditions and parameters",
+          description: "Learn how to pass parameters to functions and use if/else to make decisions based on input.",
           path: "/module/01/lesson/02",
-          icon: "🔁",
+          icon: "🔀",
           lessonId: "module01-lesson02",
-          total: 4,
+          total: 2,
+        },
+        {
+          title: "Lesson 03 - Nested loops and combinations",
+          description: "Combine loops to explore every possible combination of values and format output correctly.",
+          path: "/module/01/lesson/03",
+          icon: "🔁",
+          lessonId: "module01-lesson03",
+          total: 3,
         },
       ]}
     />

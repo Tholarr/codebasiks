@@ -13,7 +13,7 @@ const modules = [
     path: "/module/01",
     icon: "🔤",
     moduleId: "module01",
-    totalPerLesson: [4, 4],
+    totalPerLesson: [4, 2, 3],
   },
   {
     name: "Pointers",
