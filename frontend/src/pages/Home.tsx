@@ -23,6 +23,14 @@ const modules = [
     moduleId: "module02",
     totalPerLesson: [2, 3, 4],
   },
+  {
+    name: "Functions and Recursion",
+    description: "Learn how to break problems into smaller pieces using functions, iteration and recursion.",
+    path: "/module/03",
+    icon: "🔄",
+    moduleId: "module03",
+    totalPerLesson: [3, 3, 4, 2],
+  },
 ];
 
 const tags = [

@@ -42,6 +42,19 @@ const modules: Module[] = [
       { id: "module02-lesson03", title: "String manipulation and arrays", path: "/module/02/lesson/03" },
     ],
   },
+    {
+    moduleId: "module03",
+    title: "Functions and Recursion",
+    icon: "🔄",
+    path: "/module/03",
+    totalPerLesson: [3, 3, 4, 2],
+    lessons: [
+      { id: "module03-lesson01", title: "Iteration", path: "/module/03/lesson/01" },
+      { id: "module03-lesson02", title: "Recursion", path: "/module/03/lesson/02" },
+      { id: "module03-lesson03", title: "Number theory", path: "/module/03/lesson/03" },
+      { id: "module03-lesson04", title: "Backtracking", path: "/module/03/lesson/04" },
+    ],
+  },
 ];
 
 function ModuleCard({ mod }: { mod: Module }) {

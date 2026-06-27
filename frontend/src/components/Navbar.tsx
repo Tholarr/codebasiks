@@ -7,6 +7,7 @@ import { navTabStyle } from "../styles/common";
 const modules = [
   { name: "Variables, Loops and Conditions", path: "/module/01", icon: "🔤" },
   { name: "Pointers", path: "/module/02", icon: "📍" },
+  { name: "Functions and Recursion", path: "/module/03", icon: "🔄" },
 ];
 
 export default function Navbar() {
