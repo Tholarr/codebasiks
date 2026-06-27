@@ -57,6 +57,14 @@ const modules: Module[] = [
       { id: "module03-lesson04", title: "Backtracking", path: "/module/03/lesson/04" },
     ],
   },
+  {
+    moduleId: "module04",
+    title: "New module incoming",
+    icon: "🚧",
+    path: "/module/04",
+    totalPerLesson: [],
+    lessons: [],
+  },
 ];
 
 function ModuleCard({ mod }: { mod: Module }) {

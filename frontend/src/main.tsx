@@ -13,6 +13,7 @@ import Roadmap from "./pages/Roadmap";
 import Module01 from "./modules/Module01";
 import Module02 from "./modules/Module02";
 import Module03 from "./modules/Module03";
+import Module04 from "./modules/Module04";
 
 import Lesson01M01 from "./lessons/module01/Lesson01";
 import Lesson02M01 from "./lessons/module01/Lesson02";
@@ -44,6 +45,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/module/01" element={<Module01 />} />
             <Route path="/module/02" element={<Module02 />} />
             <Route path="/module/03" element={<Module03 />} />
+            <Route path="/module/04" element={<Module04 />} />
 
             {/* Module 01 */}
             <Route path="/module/01/lesson/01" element={<Lesson01M01 />} />

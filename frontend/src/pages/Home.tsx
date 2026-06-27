@@ -31,6 +31,14 @@ const modules = [
     moduleId: "module03",
     totalPerLesson: [3, 3, 4, 2],
   },
+  {
+    name: "New module incoming",
+    description: "A new module is on its way. Stay tuned!",
+    path: "/module/04",
+    icon: "🚧",
+    moduleId: "module04",
+    totalPerLesson: [],
+  },
 ];
 
 const tags = [

@@ -8,6 +8,7 @@ const modules = [
   { name: "Variables, Loops and Conditions", path: "/module/01", icon: "🔤" },
   { name: "Pointers", path: "/module/02", icon: "📍" },
   { name: "Functions and Recursion", path: "/module/03", icon: "🔄" },
+  { name: "New module incoming", path: "/module/04", icon: "🚧" },
 ];
 
 export default function Navbar() {
