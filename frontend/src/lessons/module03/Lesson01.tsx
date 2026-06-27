@@ -107,7 +107,7 @@ while (i <= n)
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 03 - my_compute_power_it"
+              title="Task 01 - my_compute_power_it"
               description={<>Write an iterative function that returns the first argument raised to the power of the second argument. In case of error, the function should return 0. It must be prototyped as follows:</>}
               prototype="int my_compute_power_it(int nb, int p);"
               starterCode={starterCode2}

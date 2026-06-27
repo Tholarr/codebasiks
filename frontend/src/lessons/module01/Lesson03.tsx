@@ -109,7 +109,7 @@ while (i <= 7)
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 05 - my_print_comb"
+              title="Task 01 - my_print_comb"
               description={<>Write a function that displays, in ascending order, all the numbers composed by three <strong>different</strong> digits. Given three digits (all different), only the smallest number composed by those digits must be displayed. Numbers are separated by <code>, </code> but not after the last one. It must be prototyped as follows:</>}
               prototype="int my_print_comb(void);"
               starterCode={starterCode5}
@@ -127,7 +127,7 @@ while (i <= 7)
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 06 - my_print_comb2"
+              title="Task 02 - my_print_comb2"
               description={<>Write a function that displays, in ascending order, all the different combinations of two two-digit numbers. Combinations are separated by <code>, </code> but not after the last one. It must be prototyped as follows:</>}
               prototype="int my_print_comb2(void);"
               starterCode={starterCode6}

@@ -91,7 +91,7 @@ nb^0 = 1         // base case`} />
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 02 - my_compute_factorial_rec"
+              title="Task 01 - my_compute_factorial_rec"
               description={<>Write a recursive function that returns the factorial of the number given as a parameter. In case of error, the function should return 0. It must be prototyped as follows:</>}
               prototype="int my_compute_factorial_rec(int nb);"
               starterCode={starterCode1}
@@ -109,7 +109,7 @@ nb^0 = 1         // base case`} />
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 04 - my_compute_power_rec"
+              title="Task 02 - my_compute_power_rec"
               description={<>Write a recursive function that returns the first argument raised to the power of the second argument. In case of error, the function should return 0. It must be prototyped as follows:</>}
               prototype="int my_compute_power_rec(int nb, int p);"
               starterCode={starterCode2}

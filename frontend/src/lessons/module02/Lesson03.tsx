@@ -81,7 +81,7 @@ str[0] = 'H';          // valid: modifies the original`} />
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 04 - my_evil_str"
+              title="Task 01 - my_evil_str"
               description={<>Write a function that swaps each of the string's characters two by two: the first letter with the last one, the second with the second-to-last, and so on. The function should return a pointer to the first character of the modified string. It will be tested with the string <code>"abcdef"</code>, which should become <code>"fedcba"</code>. It must be prototyped as follows:</>}
               prototype="char *my_evil_str(char *str);"
               starterCode={starterCode4}

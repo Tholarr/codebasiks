@@ -95,7 +95,7 @@ export default function Lesson03() {
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 05 - my_compute_square_root"
+              title="Task 01 - my_compute_square_root"
               description={<>Write a function that returns the square root of a number if it is a whole number, or 0 otherwise. It must be prototyped as follows:</>}
               prototype="int my_compute_square_root(int nb);"
               starterCode={starterCode1}
@@ -113,7 +113,7 @@ export default function Lesson03() {
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 06 - my_is_prime"
+              title="Task 02 - my_is_prime"
               description={<>Write a function that returns 1 if the number is prime and 0 if not. It must be prototyped as follows:</>}
               prototype="int my_is_prime(int nb);"
               starterCode={starterCode2}
@@ -131,7 +131,7 @@ export default function Lesson03() {
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 07 - my_find_prime_sup"
+              title="Task 03 - my_find_prime_sup"
               description={<>Write a function that returns the smallest prime number that is greater than or equal to the number given as a parameter. It must be prototyped as follows:</>}
               prototype="int my_find_prime_sup(int nb);"
               starterCode={starterCode3}

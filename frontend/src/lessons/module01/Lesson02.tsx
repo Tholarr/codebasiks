@@ -78,7 +78,7 @@ else
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 04 - my_isneg"
+              title="Task 01 - my_isneg"
               description={<>Write a function that displays either <strong>N</strong> if the integer passed as parameter is negative, or <strong>P</strong> if positive or null. It must be prototyped as follows:</>}
               prototype="int my_isneg(int n);"
               starterCode={starterCode}

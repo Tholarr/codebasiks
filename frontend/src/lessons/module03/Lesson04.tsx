@@ -89,7 +89,7 @@ n=5 -> 10 solutions`} />
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 08 - count_valid_queens_placements"
+              title="Task 01 - count_valid_queens_placements"
               description={<>Write a function that computes recursively and returns the number of possible ways to place <code>n</code> queens on an <code>n×n</code> chessboard without them being able to run into each other. It must be prototyped as follows:</>}
               prototype="int count_valid_queens_placements(int n);"
               starterCode={starterCode}

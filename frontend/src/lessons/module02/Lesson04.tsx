@@ -33,7 +33,7 @@ export default function Lesson04() {
 int n = c - '0';  // n is 7`} />
           <p>
             To handle multiple digits, the result is multiplied by 10 at each step before adding the
-            next digit. Signs and non-digit characters must also be handled carefully — the function
+            next digit. Signs and non-digit characters must also be handled carefully, the function
             should stop as soon as it encounters a character that is not a digit.
           </p>
 
@@ -52,7 +52,7 @@ int n = c - '0';  // n is 7`} />
           <p>
             A pointer to an integer array works the same way as a pointer to a string. The pointer
             holds the address of the first element, and you can move through the array with pointer
-            arithmetic or array indexing — both are equivalent in C:
+            arithmetic or array indexing, both are equivalent in C:
           </p>
           <CodeBlock code={`int arr[] = {3, 1, 2};
 int *p = arr;  // points to the first element
@@ -85,7 +85,7 @@ p[1]      // second element via indexing
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 05 - my_getnbr"
+              title="Task 01 - my_getnbr"
               description={<>Write a function that returns a number sent to the function as a string. It will be tested with <code>"+--42"</code>, which should return <code>42</code>, and with <code>"42a3"</code>, which should return <code>42</code>. It must be prototyped as follows:</>}
               prototype="int my_getnbr(char const *str);"
               starterCode={starterCode5}
@@ -103,7 +103,7 @@ p[1]      // second element via indexing
 
           {progress.loaded ? (
             <CodeExercise
-              title="Task 06 - my_sort_int_array"
+              title="Task 02 - my_sort_int_array"
               description={<>Write a function that sorts an integer array in ascending order, given a pointer to the first element of the array and its size. It will be tested with the array <code>[3, 1, 2]</code>, which should become <code>[1, 2, 3]</code>. It must be prototyped as follows:</>}
               prototype="void my_sort_int_array(int *array, int size);"
               starterCode={starterCode6}
