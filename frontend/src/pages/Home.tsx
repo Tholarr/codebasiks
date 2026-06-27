@@ -64,22 +64,24 @@ function ModuleCard({ mod }: { mod: typeof modules[0] }) {
   const { stars, loaded } = useModuleProgress(mod.moduleId);
   const starsCount = loaded ? stars(mod.totalPerLesson) : 0;
   const starsDisplay = "★".repeat(starsCount) + "☆".repeat(3 - starsCount);
+  const completed = starsCount === 3;
 
   return (
     <div
       onClick={() => { window.scrollTo(0, 0); navigate(mod.path); }}
       style={{
-        border: "1px solid #ddd",
+        border: completed ? "2px solid #f5a623" : "1px solid #ddd",
         borderRadius: "8px",
         overflow: "hidden",
         cursor: "pointer",
         transition: "box-shadow 0.2s",
+        position: "relative",
       }}
       onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.12)")}
       onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}
     >
       <div style={{
-        backgroundColor: "#1b3a2f",
+        backgroundColor: completed ? "#2e5c1e" : "#1b3a2f",
         height: "80px",
         display: "flex",
         alignItems: "center",
@@ -88,15 +90,23 @@ function ModuleCard({ mod }: { mod: typeof modules[0] }) {
         fontSize: "2rem",
       }}>
         <span>{mod.icon}</span>
-        {user && loaded && <span style={{ fontSize: "1.1rem", color: "#f5a623" }}>{starsDisplay}</span>}
+        {user && loaded && (
+          <span style={{ fontSize: "1.1rem", color: "#f5a623" }}>{starsDisplay}</span>
+        )}
       </div>
+
       <div style={{ padding: "1rem" }}>
-        <h3 style={{ margin: "0 0 0.5rem", fontSize: "1rem", color: "#2e7d32" }}>{mod.name}</h3>
-        <p style={{ margin: 0, fontSize: "0.875rem", color: "#555", lineHeight: 1.5 }}>{mod.description}</p>
+        <h3 style={{ margin: "0 0 0.5rem", fontSize: "1rem", color: completed ? "#f5a623" : "#2e7d32" }}>
+          {mod.name}
+        </h3>
+        <p style={{ margin: 0, fontSize: "0.875rem", color: "#555", lineHeight: 1.5 }}>
+          {mod.description}
+        </p>
       </div>
     </div>
   );
 }
+
 
 function InProgressCard({ mod }: { mod: typeof modules[0] }) {
   const navigate = useNavigate();
