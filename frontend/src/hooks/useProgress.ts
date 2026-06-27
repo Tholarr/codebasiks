@@ -29,7 +29,10 @@ export function useProgress(lessonId: string, total: number) {
 
   // Fetch saved progress on mount
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      setLoaded(true);
+      return;
+    }
     fetch(`/api/progress/${lessonId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
