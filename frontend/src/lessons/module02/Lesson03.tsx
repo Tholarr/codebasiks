@@ -2,6 +2,7 @@ import LessonLayout from "../../components/LessonLayout";
 import QuizQuestion from "../../components/QuizQuestion";
 import CodeExercise from "../../components/CodeExercise";
 import { codeBlockStyle } from "../../styles/common";
+import CodeBlock from "../../components/CodeBlock";
 
 const starterCode4 = `#include <unistd.h>
 
@@ -38,7 +39,7 @@ export default function Lesson03() {
             manual). For example, to read about the <code>strlen</code> function from the standard
             library, you would type:
           </p>
-          <pre style={codeBlockStyle}>{`man 3 strlen`}</pre>
+          <CodeBlock code={`man 3 strlen`} />
           <p>
             The number <code>3</code> refers to section 3 of the manual, which covers standard C
             library functions. Other sections cover system calls (section 2), shell commands (section
@@ -54,8 +55,8 @@ export default function Lesson03() {
             you can perform arithmetic on pointers: adding or subtracting an integer moves the pointer
             forward or backward by that many elements. This is called <strong>pointer arithmetic</strong>:
           </p>
-          <pre style={codeBlockStyle}>{`char *str = "hello";
-char *end = str + 4;  // points to 'o'`}</pre>
+          <CodeBlock code={`char *str = "hello";
+char *end = str + 4;  // points to 'o'`} />
           <p>
             You can also subtract two pointers of the same type to get the number of elements between
             them. This is particularly useful for computing the length of a string or finding a
@@ -69,8 +70,8 @@ char *end = str + 4;  // points to 'o'`}</pre>
             characters it points to. This makes it possible to manipulate a string <strong>in place</strong>,
             meaning you modify the original string directly without creating a copy:
           </p>
-          <pre style={codeBlockStyle}>{`char str[] = "hello";  // writable string (stored on the stack)
-str[0] = 'H';          // valid: modifies the original`}</pre>
+          <CodeBlock code={`char str[] = "hello";  // writable string (stored on the stack)
+str[0] = 'H';          // valid: modifies the original`} />
           <p>
             Note that string literals like <code>"hello"</code> are read-only in C. To get a writable
             string, you must declare it as a character array or use <code>strdup</code> to create a
@@ -85,8 +86,8 @@ str[0] = 'H';          // valid: modifies the original`}</pre>
             checking that it is a digit, and building up the result progressively. A character digit
             can be converted to its numeric value by subtracting <code>'0'</code>:
           </p>
-          <pre style={codeBlockStyle}>{`char c = '7';
-int n = c - '0';  // n is 7`}</pre>
+          <CodeBlock code={`char c = '7';
+int n = c - '0';  // n is 7`} />
           <p>
             To handle multiple digits, the result is multiplied by 10 at each step before adding the
             next digit. Signs and non-digit characters must also be handled carefully.
@@ -99,12 +100,12 @@ int n = c - '0';  // n is 7`}</pre>
             holds the address of the first element, and you can move through the array with pointer
             arithmetic or array indexing, both are equivalent in C:
           </p>
-          <pre style={codeBlockStyle}>{`int arr[] = {3, 1, 2};
+          <CodeBlock code={`int arr[] = {3, 1, 2};
 int *p = arr;  // points to the first element
 
 // These two are equivalent:
 p[1]      // second element via indexing
-*(p + 1)  // second element via pointer arithmetic`}</pre>
+*(p + 1)  // second element via pointer arithmetic`} />
           <p>
             Sorting an array in place means rearranging its elements without allocating a new array.
             One of the simplest sorting algorithms is the bubble sort: repeatedly compare adjacent

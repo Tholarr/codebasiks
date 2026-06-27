@@ -2,6 +2,7 @@ import LessonLayout from "../../components/LessonLayout";
 import QuizQuestion from "../../components/QuizQuestion";
 import CodeExercise from "../../components/CodeExercise";
 import { codeBlockStyle } from "../../styles/common";
+import CodeBlock from "../../components/CodeBlock";
 
 const starterCode2 = `#include <unistd.h>
 
@@ -29,7 +30,7 @@ export default function Lesson02() {
             <code>char</code> values stored consecutively in memory. A string is represented as a{" "}
             <code>char *</code>, a pointer to the first character of that sequence:
           </p>
-          <pre style={codeBlockStyle}>{`char *str = "hello";`}</pre>
+          <CodeBlock code={`char *str = "hello";`} />
           <p>
             The variable <code>str</code> holds the address of the character <code>'h'</code>. The
             remaining characters <code>'e'</code>, <code>'l'</code>, <code>'l'</code>, <code>'o'</code>{" "}
@@ -44,7 +45,7 @@ export default function Lesson02() {
             literals. Its value is zero, and it signals to any function reading the string that there
             are no more characters:
           </p>
-          <pre style={codeBlockStyle}>{`// "hello" is stored as: 'h' 'e' 'l' 'l' 'o' '\\0'`}</pre>
+          <CodeBlock code={`// "hello" is stored as: 'h' 'e' 'l' 'l' 'o' '\\0'`} />
           <p>
             Without the null terminator, there would be no way to know where the string ends. Any
             function that processes a string must check for <code>'\0'</code> to stop at the right place.
@@ -56,13 +57,13 @@ export default function Lesson02() {
             Since a string is just a pointer to a first character, you can move through it by
             incrementing the pointer. Each increment moves it forward by one character in memory:
           </p>
-          <pre style={codeBlockStyle}>{`char *str = "hello";
+          <CodeBlock code={`char *str = "hello";
 
 while (*str != '\\0')
 {
     // *str is the current character
     str++;  // move to the next character
-}`}</pre>
+}`} />
           <p>
             At each step, <code>*str</code> dereferences the pointer to get the current character.
             When <code>*str</code> equals <code>'\0'</code>, the loop stops.

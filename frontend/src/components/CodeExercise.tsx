@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { codeBlockStyle, secondaryButtonStyle } from "../styles/common";
+import Editor from "@monaco-editor/react";
+import { secondaryButtonStyle } from "../styles/common";
+import CodeBlock from "./CodeBlock";
 
 type RunResult = {
   success: boolean;
@@ -74,31 +76,29 @@ export default function CodeExercise({
 
   return (
     <div>
-      <h2>{title}</h2>
+      <h2>{title} {completed && <span style={{ color: "green", fontSize: "1rem" }}>✅</span>}</h2>
       <p>{description}</p>
-      <pre style={codeBlockStyle}>{prototype}</pre>
 
-      <textarea
-        value={code}
-        onChange={e => !completed && setCode(e.target.value)}
-        spellCheck={false}
-        disabled={completed}
-        style={{
-          width: "100%",
-          height: "200px",
-          marginTop: "1rem",
-          fontFamily: "monospace",
-          fontSize: "14px",
-          backgroundColor: completed ? "#111" : "#1e1e1e",
-          color: completed ? "#6a9955" : "#d4d4d4",
-          border: completed ? "1px solid #2e7d32" : "1px solid #444",
-          borderRadius: "4px",
-          padding: "1rem",
-          resize: "vertical",
-          boxSizing: "border-box",
-          cursor: completed ? "not-allowed" : "text",
-        }}
-      />
+      <CodeBlock code={prototype} />
+
+      {completed ? (
+        <CodeBlock code={code} />
+      ) : (
+        <Editor
+          height="200px"
+          language="c"
+          value={code}
+          onChange={(value) => setCode(value || "")}
+          theme="vs-dark"
+          options={{
+            minimap: { enabled: false },
+            fontSize: 14,
+            scrollBeyondLastLine: false,
+            wordWrap: "on",
+            lineNumbers: "on",
+          }}
+        />
+      )}
 
       {!completed && (
         <button onClick={runCode} disabled={running} style={{ ...secondaryButtonStyle, marginTop: "0.5rem" }}>

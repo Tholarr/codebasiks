@@ -2,6 +2,7 @@ import LessonLayout from "../../components/LessonLayout";
 import QuizQuestion from "../../components/QuizQuestion";
 import CodeExercise from "../../components/CodeExercise";
 import { codeBlockStyle } from "../../styles/common";
+import CodeBlock from "../../components/CodeBlock";
 
 const starterCode = `#include <unistd.h>
 
@@ -21,8 +22,8 @@ export default function Lesson01() {
             has an <strong>address</strong>, which is simply a number identifying where in memory the
             value lives. In C, you can access this address using the <code>&</code> operator:
           </p>
-          <pre style={codeBlockStyle}>{`int n = 42;
-int *p = &n;  // p now holds the address of n`}</pre>
+          <CodeBlock code={`int n = 42;
+int *p = &n;  // p now holds the address of n`} />
           <p>
             The type <code>int *</code> means "a pointer to an integer"; in other words, a variable
             that stores the address of an <code>int</code>. The variable <code>p</code> itself does
@@ -35,11 +36,11 @@ int *p = &n;  // p now holds the address of n`}</pre>
             To access or modify the value <em>at</em> the address stored in a pointer, you use the{" "}
             <code>*</code> operator. This is called <strong>dereferencing</strong>:
           </p>
-          <pre style={codeBlockStyle}>{`int n = 42;
+          <CodeBlock code={`int n = 42;
 int *p = &n;
 
 *p = 100;  // modifies the value at the address p points to
-// n is now 100`}</pre>
+// n is now 100`} />
           <p>
             Notice that <code>*p = 100</code> does not change what address <code>p</code> points to.
             It changes the value stored at that address. This is the key distinction between a pointer
@@ -58,7 +59,7 @@ int *p = &n;
             original variable. The function can then dereference that address and modify the original
             directly. This is called <strong>passing by reference</strong>:
           </p>
-          <pre style={codeBlockStyle}>{`void set_to_zero(int *n)
+          <CodeBlock code={`void set_to_zero(int *n)
 {
     *n = 0;  // modifies the original variable
 }
@@ -68,7 +69,7 @@ int main(void)
     int x = 42;
     set_to_zero(&x);  // passes the address of x
     // x is now 0
-}`}</pre>
+}`} />
           <p>
             This mechanism is fundamental to C. Any function that needs to modify a variable declared
             outside of it must receive a pointer to that variable.

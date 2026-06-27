@@ -2,6 +2,7 @@ import LessonLayout from "../../components/LessonLayout";
 import QuizQuestion from "../../components/QuizQuestion";
 import CodeExercise from "../../components/CodeExercise";
 import { codeBlockStyle } from "../../styles/common";
+import CodeBlock from "../../components/CodeBlock";
 
 const combOutput = (() => {
   const results: string[] = [];
@@ -54,7 +55,7 @@ export default function Lesson02() {
             the function can use internally. The parameter is declared inside the parentheses of the
             prototype, with its type and a name:
           </p>
-          <pre style={codeBlockStyle}>{`int my_function(int n);`}</pre>
+          <CodeBlock code={`int my_function(int n);`} />
           <p>
             Inside the function, <code>n</code> behaves like any other variable. Its value depends on
             what was passed when the function was called. The type <code>int</code> is used to store
@@ -66,14 +67,14 @@ export default function Lesson02() {
           <p>
             To make a decision based on a value, C provides the <code>if</code> / <code>else</code> structure:
           </p>
-          <pre style={codeBlockStyle}>{`if (condition)
+          <CodeBlock code={`if (condition)
 {
     // runs if condition is true
 }
 else
 {
     // runs if condition is false
-}`}</pre>
+}`} />
           <p>
             The condition can use comparison operators: <code>==</code> (equal), <code>!=</code> (not equal),{" "}
             <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. Only one
@@ -87,7 +88,7 @@ else
             <strong>inside</strong> something that is already repeating, you can place a loop inside
             another loop, this is called a <strong>nested loop</strong>:
           </p>
-          <pre style={codeBlockStyle}>{`while (a <= max_a)
+          <CodeBlock code={`while (a <= max_a)
 {
     b = start;
     while (b <= max_b)
@@ -96,7 +97,7 @@ else
         b++;
     }
     a++;
-}`}</pre>
+}`} />
           <p>
             For each iteration of the outer loop, the inner loop runs completely from start to finish.
             This lets you explore every possible combination of two variables, which is useful when

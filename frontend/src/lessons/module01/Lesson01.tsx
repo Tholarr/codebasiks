@@ -1,7 +1,7 @@
 import LessonLayout from "../../components/LessonLayout";
 import QuizQuestion from "../../components/QuizQuestion";
 import CodeExercise from "../../components/CodeExercise";
-import { codeBlockStyle } from "../../styles/common";
+import CodeBlock from "../../components/CodeBlock";
 
 const starterCode1 = `#include <unistd.h>
 
@@ -40,7 +40,7 @@ export default function Lesson01() {
             To store a single character, C provides the <code>char</code> type. A <code>char</code> can
             hold any single character: a letter, a digit, or a symbol. You declare and assign one like this:
           </p>
-          <pre style={codeBlockStyle}>{`char c;\nc = 'a';`}</pre>
+          <CodeBlock code={`char c;\nc = 'a';`} />
           <p>
             Notice that characters are always written between <strong>single quotes</strong> <code>' '</code>.
             This is how C knows you mean the character <code>a</code>, and not something else.
@@ -63,7 +63,7 @@ export default function Lesson01() {
           <hr style={{ margin: "1.5rem 0" }} />
 
           <p>A <strong>while loop</strong> repeats a block of code as long as a given condition remains true:</p>
-          <pre style={codeBlockStyle}>{`while (condition)\n{\n    // code to repeat\n}`}</pre>
+          <CodeBlock code={`while (condition)\n{\n    // code to repeat\n}`} />
           <p>
             The condition is checked before each iteration. The moment it becomes false, the loop stops.
             If it never becomes false, the loop runs forever (something to be careful about).
@@ -75,7 +75,7 @@ export default function Lesson01() {
             To display output in C, one of the available tools is the <code>write</code> function,
             which comes from the <code>&lt;unistd.h&gt;</code> library:
           </p>
-          <pre style={codeBlockStyle}>{`write(1, &c, 1);`}</pre>
+          <CodeBlock code={`write(1, &c, 1);`} />
           <ul>
             <li>The first is the destination: <code>1</code> means the terminal</li>
             <li>The second is the address of the data to write: <code>&c</code> gives the address of the variable <code>c</code></li>
@@ -105,17 +105,17 @@ export default function Lesson01() {
           <hr style={{ margin: "2rem 0" }} />
 
           {progress.loaded ? (
-          <CodeExercise
-            title="Task 01 - my_print_alpha"
-            description={<>Write a function that, beginning with <strong>a</strong>, displays the lowercase alphabet in ascending order, on a single line. It must be prototyped as follows:</>}
-            prototype="int my_print_alpha(void);"
-            starterCode={starterCode1}
-            expectedOutput="abcdefghijklmnopqrstuvwxyz"
-            functionCall="my_print_alpha()"
-            taskId="my_print_alpha"
-            savedCode={progress.getSavedExercise("my_print_alpha")?.code}
-            onSuccess={(code) => progress.saveExercise("my_print_alpha", code, true)}
-          />
+            <CodeExercise
+              title="Task 01 - my_print_alpha"
+              description={<>Write a function that, beginning with <strong>a</strong>, displays the lowercase alphabet in ascending order, on a single line. It must be prototyped as follows:</>}
+              prototype="int my_print_alpha(void);"
+              starterCode={starterCode1}
+              expectedOutput="abcdefghijklmnopqrstuvwxyz"
+              functionCall="my_print_alpha()"
+              taskId="my_print_alpha"
+              savedCode={progress.getSavedExercise("my_print_alpha")?.code}
+              onSuccess={(code) => progress.saveExercise("my_print_alpha", code, true)}
+            />
           ) : (
             <p style={{ color: "#888", fontStyle: "italic" }}>Loading...</p>
           )}
