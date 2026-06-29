@@ -14,7 +14,7 @@ void my_swap(int *a, int *b)
 
 export default function Lesson01() {
   return (
-    <LessonLayout title="Introduction to pointers" lessonId="module02-lesson01" total={2} modulePath="/module/02" nextPath="/module/02/lesson/02">
+    <LessonLayout title="Introduction to pointers" lessonId="module02-lesson01" total={2} modulePath="/module/02" prevPath="/module/02" nextPath="/module/02/lesson/02">
       {(progress) => (
         <>
           <p>

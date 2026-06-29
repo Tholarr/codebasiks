@@ -21,7 +21,7 @@ int my_compute_power_it(int nb, int p)
 
 export default function Lesson01() {
   return (
-    <LessonLayout title="Iteration" lessonId="module03-lesson01" total={3} modulePath="/module/03" nextPath="/module/03/lesson/02">
+    <LessonLayout title="Iteration" lessonId="module03-lesson01" total={3} modulePath="/module/03" prevPath="/module/03" nextPath="/module/03/lesson/02">
       {(progress) => (
         <>
           <p>
