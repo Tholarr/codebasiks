@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
 
-// Transporter configured with Gmail
 export const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -9,8 +8,19 @@ export const transporter = nodemailer.createTransport({
   },
 });
 
-// Send an inactivity reminder email
-export async function sendInactivityEmail(to: string, username: string, daysSinceLastActive: number) {
+function formatInactivity(minutes: number): string {
+  if (minutes < 60)
+    return `${minutes} minute${minutes > 1 ? "s" : ""}`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24)
+    return `${hours} hour${hours > 1 ? "s" : ""}`;
+  const days = Math.floor(hours / 24);
+  return `${days} day${days > 1 ? "s" : ""}`;
+}
+
+export async function sendInactivityEmail(to: string, username: string, minutesSinceLastActive: number) {
+  const duration = formatInactivity(minutesSinceLastActive);
+
   await transporter.sendMail({
     from: `"CodeBasiks" <${process.env.MAIL_USER}>`,
     to,
@@ -18,9 +28,9 @@ export async function sendInactivityEmail(to: string, username: string, daysSinc
     html: `
       <div style="font-family: sans-serif; max-width: 500px; margin: 0 auto; padding: 2rem;">
         <h1 style="color: #2e7d32;">Hey ${username}! 👋</h1>
-        <p>It's been <strong>${daysSinceLastActive} days</strong> since you last visited CodeBasiks.</p>
+        <p>It's been <strong>${duration}</strong> since you last visited CodeBasiks.</p>
         <p>You were making great progress, don't let it stop now!</p>
-        <p>Every line of code you write brings you closer to mastering programming fundamentals. Your future self will thank you.</p>
+        <p>Every challenge you complete brings you one step closer to thinking like a programmer.</p>
         <a href="https://codebasiks.vercel.app" style="
           display: inline-block;
           margin-top: 1rem;

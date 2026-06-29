@@ -83,30 +83,30 @@ function cleanup(...paths: string[]) {
   paths.forEach(p => { try { unlinkSync(p); } catch {} });
 }
 
-// Keep Render awake by pinging itself every 10 minutes
-cron.schedule("*/10 * * * *", async () => {
+// Keep Render awake every 5 minutes (test mode)
+cron.schedule("*/5 * * * *", async () => {
   try {
     await fetch(`https://codebasiks.onrender.com/api/ping`);
     console.log(">> Keep-alive ping sent");
   } catch {}
 });
 
-// Run inactivity check every day at 9am
-cron.schedule("0 9 * * *", async () => {
+// Run inactivity check every 5 minutes (test mode)
+cron.schedule("*/5 * * * *", async () => {
   console.log(">> Running inactivity check...");
   try {
     const result = await pool.query(`
       SELECT id, username, email, last_active
       FROM users
       WHERE email IS NOT NULL
-      AND last_active < NOW() - INTERVAL '24 hours'
+      AND last_active < NOW() - INTERVAL '5 minutes'
     `);
 
     for (const user of result.rows) {
-      const daysSince = Math.floor(
-        (Date.now() - new Date(user.last_active).getTime()) / (1000 * 60 * 60 * 24)
+      const minutesSince = Math.floor(
+        (Date.now() - new Date(user.last_active).getTime()) / (1000 * 60)
       );
-      await sendInactivityEmail(user.email, user.username, daysSince);
+      await sendInactivityEmail(user.email, user.username, minutesSince);
       console.log(`>> Email sent to ${user.username}`);
     }
 
